@@ -1,9 +1,8 @@
 <template>
-  <div class="main">
-    <h1>The IMGS.</h1>
-    <h2>Only best photos of space by NASA.</h2>
+  <div class="search">
+    <Header />
     <div class="query">
-      <label for="search">Search the object </label>
+      <label for="search">Search the object</label>
       <input
         id="search"
         name="search"
@@ -11,7 +10,7 @@
         v-model="query"
         @input="search"
       />
-      <p class="queryStats">{{amount}}</p>
+      <p class="queryStats">Amount of results: {{amount}}</p>
     </div>
   </div>
 </template>
@@ -19,10 +18,11 @@
 <script>
 import axios from 'axios';
 import debounce from 'lodash.debounce';
+import Header from '@/components/Header.vue';
 
 const API = 'https://images-api.nasa.gov/search?q=';
 export default {
-  name: 'Home',
+  name: 'Search',
   data() {
     return {
       query: '',
@@ -30,29 +30,32 @@ export default {
       amount: 0,
     };
   },
+  components: { Header },
   methods: {
     search: debounce(function search() {
-      axios.get(`${API}${this.query}&media_type=image`)
-        .then((response) => {
-          this.results = response.data.collection.items;
-          this.amount = this.results.length;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (document.getElementById('search').value === '') {
+        this.amount = 0;
+        this.results = [];
+      } else {
+        axios.get(`${API}${this.query}&media_type=image`)
+          .then((response) => {
+            this.results = response.data.collection.items;
+            if (this.results.length >= 100) {
+              this.amount = `>${this.results.length}`;
+            } else this.amount = this.results.length;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }, 1000),
   },
 };
 
 </script>
 
-<style lang="scss">
-  h1, h2 {
-    color: white;
-    text-shadow: 0 0 20px #FFFFFF;
-  }
-  .main {
-    height: 85%;
+<style lang="scss" scoped>
+  .search {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,6 +64,8 @@ export default {
     margin: 0;
   }
   .query {
+    text-shadow: 0 0 20px #FFFFFF;
+    margin-top: 150px;
     display: flex;
     flex-direction: column;
     width: 250px;
