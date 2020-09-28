@@ -13,6 +13,7 @@
   html, body {
     height: 100%;
     margin: 0;
+    color: white;
   }
   .app {
     height: 100%;
@@ -21,7 +22,8 @@
     background-image: url("assets/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: Montserrat, sans-serif;
-    overflow: hidden;
+    background-position: center;
+    font-family: "Lucida Console", Courier, monospace;
+    background-color: black;
   }
 </style>
