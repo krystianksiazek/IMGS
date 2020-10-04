@@ -1,10 +1,16 @@
 <template>
   <div class="app">
-      <router-link class="imgs" to="/">IMGS</router-link>
-      <router-link class="about" to="/about">about</router-link>
+      <router-link class="imgs" to="/">HOME</router-link>
+      <router-link class="about" to="/about">ABOUT</router-link>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+};
+</script>
 
 <style lang="scss">
   @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500;700&display=swap');
@@ -26,22 +32,35 @@
     background-position: center;
     font-family: 'Work Sans', sans-serif;
     background-color: black;
-
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
   }
   body {
 
-    background-image: radial-gradient(rgba(0, 0, 0, 0.4),
-    rgba(0, 0, 0, 0.2),
+    background-image: radial-gradient(rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.1),
     rgba(0, 0, 0, 0));
+  }
+  .imgs, .about {
+    width: 60px;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
   }
   .imgs {
     position: absolute;
-    top: 5px;
+    top: 10px;
     left: 10px;
   }
   .about {
     position: absolute;
-    top: 5px;
+    top: 10px;
     right: 10px;
   }
 </style>
