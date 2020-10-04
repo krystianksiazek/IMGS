@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <h1>The IMGS.</h1>
-    <h2>NASA's space image search engine.</h2>
+    <h1 class="heading">The IMGS</h1>
+    <h2 class="subheading">NASA's space image search engine.</h2>
   </div>
 </template>
 <script>
@@ -11,14 +11,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wrapper {
-  margin-top: 200px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
-h1, h2 {
+.heading {
+  font-size: 60px;
+  letter-spacing: 5px;
+}
+.heading, .subheading {
   color: white;
-  text-shadow: 0 0 20px #FFFFFF;
+  text-shadow: 0 0 10px rgb(200, 200, 200);
+  text-align: center;
 }
 </style>

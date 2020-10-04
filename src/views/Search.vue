@@ -64,8 +64,8 @@ export default {
     margin: 0;
   }
   .query {
-    text-shadow: 0 0 20px #FFFFFF;
-    margin-top: 150px;
+    text-shadow: 0 0 10px rgb(200, 200, 200);
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
     width: 250px;
