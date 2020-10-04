@@ -53,6 +53,9 @@ export default {
             this.results = response.data.collection.items;
             if (this.results.length >= 100) {
               this.amount = `>${this.results.length}`;
+            } else if (this.results.length === 0) {
+              this.state = '0';
+              this.isLoading = false;
             } else {
               this.amount = this.results.length;
             }
