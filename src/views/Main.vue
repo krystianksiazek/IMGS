@@ -12,8 +12,6 @@
         @input="search"
       />
       <p class="queryStats">Amount of results: {{amount}}</p>
-      <!-- <p v-if="isLoading === true">Loading...</p> -->
-      <!-- <p>{{state}}</p> -->
     </div>
   </div>
 </template>
