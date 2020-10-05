@@ -12,13 +12,13 @@
         v-model="query"
         @input="search"
       />
-      <p class="queryStats">Amount of results:
-        <span v-if="results.length >= 100">
-          Above
-        </span>
-        {{results.length}}
-      </p>
     </div>
+    <p v-if="state === '1'" class="queryStats">Amount of results:
+      <span v-if="results.length >= 100">
+        Above
+      </span>
+      {{results.length}}
+    </p>
   </div>
 </template>
 
@@ -72,8 +72,14 @@ export default {
 <style lang="scss" scoped>
   .startExploringInput {
     border-bottom: 1px dashed red !important;
+    box-shadow: 0 10px 8px -4px rgba(255, 0, 0, 0.2) !important;
+    @media (max-width: 768px)
+    {
+      box-shadow: 0 15px 8px -4px rgba(255, 0, 0, 0.2) !important;
+    }
   }
   .mainWrapper {
+    text-shadow: 0 0 10px rgb(200, 200, 200);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -82,7 +88,6 @@ export default {
     margin: 0;
   }
   .query {
-    text-shadow: 0 0 10px rgb(200, 200, 200);
     margin-top: 60px;
     display: flex;
     flex-direction: column;
