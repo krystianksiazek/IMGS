@@ -1,9 +1,10 @@
 <template>
-  <div v-bind:class="{'startExploring': (state === 1)}" class="mainWrapper">
+  <div v-bind:class="{'startExploringWrapper2': (state === '1')}" class="mainWrapper">
     <Header :sendState="state" />
     <div class="query">
       <label v-if="state === '0'" for="search">Type space-related thing to start</label>
       <input
+        v-bind:class="{'startExploringInput': (results.length === 0) && (state === '1')}"
         id="search"
         name="search"
         placeholder="Eg. Saturn"
@@ -11,7 +12,12 @@
         v-model="query"
         @input="search"
       />
-      <p class="queryStats">Amount of results: {{amount}}</p>
+      <p class="queryStats">Amount of results:
+        <span v-if="results.length >= 100">
+          Above
+        </span>
+        {{results.length}}
+      </p>
     </div>
   </div>
 </template>
@@ -31,7 +37,6 @@ export default {
     return {
       query: '',
       results: [],
-      amount: 0,
       isLoading: false,
       state: '0',
     };
@@ -41,7 +46,6 @@ export default {
     debounce(function search() {
       this.isLoading = true;
       if (document.getElementById('search').value === '') {
-        this.amount = 0;
         this.results = [];
         this.state = '0';
         this.isLoading = false;
@@ -51,13 +55,9 @@ export default {
             this.isLoading = false;
             this.state = '1';
             this.results = response.data.collection.items;
-            if (this.results.length >= 100) {
-              this.amount = `>${this.results.length}`;
-            } else if (this.results.length === 0) {
-              this.state = '0';
+            if (this.results.length === 0) {
+              this.state = '1';
               this.isLoading = false;
-            } else {
-              this.amount = this.results.length;
             }
           })
           .catch((error) => {
@@ -70,6 +70,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .startExploringInput {
+    border-bottom: 1px dashed red !important;
+  }
   .mainWrapper {
     display: flex;
     flex-direction: column;
