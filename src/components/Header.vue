@@ -1,8 +1,10 @@
 <template>
-  <div v-bind:class="{'startExploringWrapper': (sendState === '1')}" class="wrapper">
-    <h1 class="heading">The IMGS</h1>
-    <h2 v-if="sendState === '0'" class="subheading">Discover amazing
-      photos of space objects from NASA</h2>
+  <div class="wrapper">
+    <h1 v-bind:class="{'exploringSubheading': (sendState === '1')}" class="heading">The IMGS</h1>
+    <h1 v-bind:class="{'exploringSubheading': (sendState === '0')}" class="exploringHeading">
+      IMGS</h1>
+    <h2 v-bind:class="{'exploringSubheading': (sendState === '1')}" class="subheading">
+      Discover amazing photos of space objects from NASA</h2>
   </div>
 </template>
 <script>
@@ -15,13 +17,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wrapper {
-  transition: top 1s ease-out;
-  transition: position 1s ease-out;
-  top: 20%;
+}
+.exploringHeading {
+  top: 40px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  transition: opacity 200ms, visibility 200ms;
+  transition-delay: 0.5s;
 }
 .heading {
   font-size: 60px;
   letter-spacing: 5px;
+  opacity: 1;
+  transition: opacity 200ms, visibility 200ms;
+  font-weight: 500;
 }
 .heading, .subheading {
   color: white;
@@ -29,11 +39,14 @@ export default {
   text-align: center;
 }
 .subheading {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 200ms, visibility 200ms;
   font-weight: 500;
 }
-.startExploringWrapper {
-  transition: top 1s ease-out;
-  top: 10px;
-  position: absolute;
+.exploringSubheading {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 200ms, visibility 200ms;
 }
 </style>
