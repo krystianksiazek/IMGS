@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="mainWrapper">
     <Header :sendState="state" />
     <div class="query">
@@ -17,12 +18,16 @@
       />
     </div>
     <p v-bind:class="{'exploringQueryStats': (state === '1')}" class="queryStats">Amount of results:
-      <span v-if="results.length >= 100">
-        Above
-      </span>
-      {{results.length}}
+      <span v-if="results.length >= 100">></span>{{results.length}}
     </p>
+    <div v-if="state === '1'" class = "results">
+      <div v-for="results in results" :key="results.data[0].nasa_id">
+        <img v-if="state === '1'" :src="results.links[0].href"/>
+      </div>
+    </div>
   </div>
+
+</div>
 </template>
 
 <script>
@@ -40,29 +45,29 @@ export default {
     return {
       query: '',
       results: [],
-      isLoading: false,
+      loading: false,
       state: '0',
     };
   },
   methods: {
+    // wakeUp:
+    //   function wakeUp() {
+    //     this.state = '1';
+    //   },
     search:
     debounce(function search() {
-      this.isLoading = true;
+      this.loading = true;
       if (document.getElementById('search').value === ''
-      || document.getElementById('search').value === ' ') {
+      || (document.getElementById('search').value).startsWith(' ')) {
         this.results = [];
         this.state = '0';
-        this.isLoading = false;
+        this.loading = false;
       } else {
         axios.get(`${API}${this.query}&media_type=image`)
           .then((response) => {
-            this.isLoading = false;
+            this.loading = false;
             this.state = '1';
             this.results = response.data.collection.items;
-            if (this.results.length === 0) {
-              this.state = '1';
-              this.isLoading = false;
-            }
           })
           .catch((error) => {
             console.log(error);
@@ -166,5 +171,9 @@ export default {
     position: absolute;
     transition: opacity 600ms, visibility 600ms;
     transition-delay: 0.5s;
+  }
+  .results {
+    top: 180px;
+    position: absolute;
   }
 </style>
