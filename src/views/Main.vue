@@ -20,11 +20,14 @@
     <p v-bind:class="{'exploringQueryStats': (state === '1')}" class="queryStats">Amount of results:
       <span v-if="results.length >= 100">></span>{{results.length}}
     </p>
-    <div v-if="state === '1'" class = "results">
-      <div v-for="results in results" :key="results.data[0].nasa_id">
-        <img v-if="state === '1'" :src="results.links[0].href"/>
+    <div class = "results" v-if="state === '1'">
+      <div class="imageBody"
+      v-for="results in results" :key="results.data[0].nasa_id"
+      v-bind:style="{ 'background-image': 'url(' + results.links[0].href + ')' }">
+      <span class="imageTitle">↓ {{results.data[0].title}} ↓</span>
       </div>
     </div>
+    <div v-on:click="toTheTop" class='topBtn'>TOP</div>
   </div>
 
 </div>
@@ -49,11 +52,27 @@ export default {
       state: '0',
     };
   },
+  mounted() {
+    const goToTopBtn = document.getElementById('myBtn');
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        goToTopBtn.style.display = 'block';
+      } else {
+        goToTopBtn.style.display = 'none';
+      }
+    }
+    window.onscroll = function () { scrollFunction(); };
+  },
   methods: {
     // wakeUp:
     //   function wakeUp() {
     //     this.state = '1';
     //   },
+    toTheTop:
+    function top() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    },
     search:
     debounce(function search() {
       this.loading = true;
@@ -77,7 +96,6 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
   .inputNegativeResults {
     border-bottom: 2px solid rgb(136, 0, 5) !important;
@@ -173,7 +191,63 @@ export default {
     transition-delay: 0.5s;
   }
   .results {
-    top: 180px;
+    text-align: center;
+    top: 200px;
     position: absolute;
+    display: grid;
+    max-width: min-content;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 30px 20px rgba(0, 0, 0, 0.9);
+    @media (max-width: 1700px)
+    {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 1300px)
+    {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 900px)
+    {
+      grid-template-columns: 1fr;
+    }
+  }
+  .imageBody {
+    height: 400px;
+    width: 400px;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    @media (max-width: 900px)
+    {
+      height: 340px;
+      width: 340px;
+    }
+  }
+  .imageBody:last-child {
+    align-self: center;
+  }
+  .imageTitle {
+    background-color: black;
+    padding: 5px;
+    line-height: 15px;
+    display: block;
+    text-shadow: none;
+  }
+  .topBtn {
+    padding: 5px;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    text-decoration: none;
+    background-color: black;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-shadow: none;
+    display: none;
+    position: fixed;
+    bottom: 10px;
+    right: auto;
+    border-radius: 4px;
+    max-width: min-content;
   }
 </style>
