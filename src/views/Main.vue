@@ -27,7 +27,7 @@
       <span class="imageTitle">↓ {{results.data[0].title}} ↓</span>
       </div>
     </div>
-    <div v-on:click="toTheTop" class='topBtn'>TOP</div>
+    <div v-on:click="scrollToTop" id='topBtn'>TOP</div>
   </div>
 
 </div>
@@ -52,26 +52,28 @@ export default {
       state: '0',
     };
   },
-  mounted() {
-    const goToTopBtn = document.getElementById('myBtn');
-    function scrollFunction() {
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        goToTopBtn.style.display = 'block';
-      } else {
-        goToTopBtn.style.display = 'none';
-      }
-    }
-    window.onscroll = function () { scrollFunction(); };
+  created() {
+    window.addEventListener('scroll', this.scrollListener);
   },
   methods: {
     // wakeUp:
     //   function wakeUp() {
     //     this.state = '1';
     //   },
-    toTheTop:
+    scrollToTop:
     function top() {
       document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
+    },
+    scrollListener:
+    function scrollFunction() {
+      if (this.state === '1') {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop) {
+          document.querySelector('#topBtn').style.display = 'block';
+        } else {
+          document.querySelector('#topBtn').style.display = 'none';
+        }
+      }
     },
     search:
     debounce(function search() {
@@ -234,7 +236,7 @@ export default {
     display: block;
     text-shadow: none;
   }
-  .topBtn {
+  #topBtn {
     padding: 5px;
     color: white;
     font-size: 20px;
