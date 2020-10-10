@@ -24,6 +24,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+
   }
   html {
     background-image: url("assets/background.jpg");
@@ -38,6 +39,7 @@ export default {
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    scrollbar-color: #888 #3e3e3e;
   }
   body {
 
