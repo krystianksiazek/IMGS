@@ -1,6 +1,6 @@
 <template>
-  <div>
   <div class="mainWrapper">
+    <Modal />
     <Header :sendState="state" />
     <div class="query">
       <label v-bind:class="{'exploringLabel': (state === '1')}" for="search">
@@ -29,12 +29,11 @@
     </div>
     <div v-on:click="scrollToTop" id='topBtn'>TOP</div>
   </div>
-
-</div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue';
+import Modal from '@/components/Modal.vue';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 
@@ -43,6 +42,7 @@ export default {
   name: 'Main',
   components: {
     Header,
+    Modal,
   },
   data() {
     return {
