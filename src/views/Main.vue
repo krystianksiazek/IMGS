@@ -1,6 +1,6 @@
 <template>
   <div class="mainWrapper">
-    <Modal />
+    <Modal v-if="modalOpen" :item="modalData" @closeModal="modalOpen = false; showScroll()" />
     <Header :sendState="state" />
     <div class="query">
       <label v-bind:class="{'exploringLabel': (state === '1')}" for="search">
@@ -23,7 +23,8 @@
     <div class = "results" v-if="state === '1'">
       <div class="imageBody"
       v-for="results in results" :key="results.data[0].nasa_id"
-      v-bind:style="{ 'background-image': 'url(' + results.links[0].href + ')' }">
+      v-bind:style="{ 'background-image': 'url(' + results.links[0].href + ')' }"
+      @click="handleModalOpen(results)">
       <span class="imageTitle">↓ {{results.data[0].title}} ↓</span>
       </div>
     </div>
@@ -46,6 +47,8 @@ export default {
   },
   data() {
     return {
+      modalOpen: false,
+      modalData: null,
       query: '',
       results: [],
       loading: false,
@@ -60,6 +63,15 @@ export default {
     //   function wakeUp() {
     //     this.state = '1';
     //   },
+    handleModalOpen(item) {
+      this.modalOpen = true;
+      this.modalData = item;
+      console.log(item);
+      document.body.style.overflow = 'hidden';
+    },
+    showScroll() {
+      document.body.style.overflow = 'auto';
+    },
     scrollToTop:
     function top() {
       document.body.scrollTop = 0;
@@ -193,6 +205,8 @@ export default {
     transition-delay: 0.5s;
   }
   .results {
+    margin-bottom: 20px;
+    cursor: pointer;
     text-align: center;
     top: 200px;
     position: absolute;
@@ -237,6 +251,7 @@ export default {
     text-shadow: none;
   }
   #topBtn {
+    cursor: pointer;
     padding: 5px;
     color: white;
     font-size: 20px;
