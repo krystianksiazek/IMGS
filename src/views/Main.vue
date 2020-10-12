@@ -66,7 +66,7 @@ export default {
     handleModalOpen(item) {
       this.modalOpen = true;
       this.modalData = item;
-      console.log(item);
+      // console.log(item);
       document.body.style.overflow = 'hidden';
     },
     showScroll() {
