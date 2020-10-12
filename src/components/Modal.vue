@@ -3,17 +3,22 @@
     <div class="modalWrapper">
       <div class="titleAndClose">
         <span class="title">
-          {{ title }}
+          {{ title }} (ID: {{ id }})
         </span>
         <a class="close" @click="$emit('closeModal')" />
       </div>
       <div class="content">
-        <div class="photo" v-bind:style="{ backgroundImage: 'url(' + photo + ')' }">
+        <div class="photo" @click="myhref(fullSize)"
+         v-bind:style="{ backgroundImage: 'url(' + photo + ')' }">
         </div>
         <div class="aboutPhoto">
           <h1>{{ title }}</h1>
           <p class="description">
             {{ description }}
+            <br><br>
+            <span v-if="location != null">Location: {{ location }}</span>
+            <br>
+            <span v-if="date != null">Date: {{ date }}</span>
           </p>
         </div>
       </div>
@@ -31,15 +36,30 @@ export default {
   },
   data() {
     return {
+      id: null,
+      location: null,
+      date: null,
       photo: null,
       title: null,
       description: null,
+      fullSize: null,
     };
   },
   mounted() {
+    this.id = this.item.data[0].nasa_id;
+    this.location = this.item.data[0].location;
+    this.date = this.item.data[0].date_created;
     this.photo = this.item.links[0].href;
     this.title = this.item.data[0].title;
     this.description = this.item.data[0].description;
+    this.fullSize = this.item.href;
+  },
+  methods: {
+    myhref(href) {
+      // window.open(links, '_blank');
+      console.log(href);
+      // window.location.href = href;
+    },
   },
 };
 </script>
