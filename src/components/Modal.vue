@@ -1,5 +1,5 @@
 <template>
-  <div class="darker">
+  <div class="dimmer">
     <div class="modalWrapper">
       <div class="titleAndClose">
         <span class="title">
@@ -33,6 +33,10 @@ export default {
       type: Object,
       required: true,
     },
+    modalState: {
+      type: Boolean,
+      required: true,
+    },
   },
   data() {
     return {
@@ -64,7 +68,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  .darker {
+  .dimmer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,7 +77,7 @@ export default {
     left: 0;
     height: 100%;
     width: 100%;
-    z-index: 10;
+    z-index: 2;
     background-color: rgba(0,0,0,0.6);
   }
   .modalWrapper {
@@ -82,7 +86,7 @@ export default {
     background-color: grey;
     // border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 2px;
-    z-index: 20;
+    z-index: 3;
     @media (max-width: 1000px)
     {
       width: 100% !important;
