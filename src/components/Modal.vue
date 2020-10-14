@@ -111,6 +111,7 @@ export default {
     }
   }
   .aboutPhoto {
+    text-shadow: 0 0 10px #555;
     text-align: center;
     width: 50%;
     height: 100%;
