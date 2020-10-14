@@ -5,7 +5,7 @@
         <span class="title">
           {{ title }} (ID: {{ id }})
         </span>
-        <a class="close" @click="$emit('closeModal')" />
+        <a class="close" @click="$emit('close-modal')" />
       </div>
       <div class="content">
         <div class="photo" @click="myhref(fullSize)"

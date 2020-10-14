@@ -1,7 +1,7 @@
 <template>
   <div class="mainWrapper">
     <Modal v-if="modalOpen" :item="modalData" :modalState="modalOpen"
-    @closeModal="modalOpen = false; showScroll()" />
+    @close-modal="modalOpen = false; showScroll()" />
     <Header :sendState="state" />
     <div class="query">
       <label v-bind:class="{'exploringLabel': (state === '1')}" for="search">
@@ -67,7 +67,6 @@ export default {
     handleModalOpen(item) {
       this.modalOpen = true;
       this.modalData = item;
-      // console.log(item);
       document.body.style.overflow = 'hidden';
     },
     showScroll() {

@@ -16,8 +16,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.wrapper {
-}
 .exploringHeading {
   top: 40px;
   left: 50%;
