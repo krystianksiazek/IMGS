@@ -5,7 +5,7 @@
     <Header :sendState="state" />
     <div class="query">
       <label v-bind:class="{'exploringLabel': (state === '1')}" for="search">
-        Type space-related thing to start</label>
+        Type space related thing to start</label>
       <input
         v-bind:class="{'inputNegativeResults': (results.length === 0) && (state === '1'),
         'inputPositiveResults': (results.length > 0) && (state === '1'),
@@ -139,13 +139,16 @@ export default {
     width: 250px;
   }
   .mainWrapper {
-    text-shadow: 0 0 10px rgb(200, 200, 200);
+    text-shadow: 0 0 5px rgb(100, 100, 100);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 30px;
     margin: 0;
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
   }
   .query {
     margin-top: 60px;
@@ -169,7 +172,7 @@ export default {
     }
     input {
       font-weight: 800;
-      font-size: 15px;
+      font-size: 18px;
       border: none;
       height: 30px;
       border-bottom: 2px solid white;
@@ -266,5 +269,14 @@ export default {
     right: auto;
     border-radius: 4px;
     max-width: min-content;
+  }
+
+  @keyframes fadeInAnimation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 </style>
