@@ -83,7 +83,7 @@ export default {
   .modalWrapper {
     width: 80%;
     position: absolute;
-    background-color: grey;
+    background-color: rgb(70, 70, 70);
     // border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 2px;
     z-index: 3;
