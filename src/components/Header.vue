@@ -1,10 +1,14 @@
 <template>
   <div class="wrapper">
-    <h1 v-bind:class="{'exploringSubheading': (sendState === '1')}" class="heading">The IMGS</h1>
+    <h1 v-bind:class="{'exploringSubheading': (sendState === '1')}" class="heading">
+      The IMGS
+    </h1>
     <h1 v-bind:class="{'exploringSubheading': (sendState === '0')}" class="exploringHeading">
-      IMGS</h1>
+      IMGS
+    </h1>
     <h2 v-bind:class="{'exploringSubheading': (sendState === '1')}" class="subheading">
-      Discover amazing photos of space objects from NASA</h2>
+      Discover amazing space related photos from NASA
+    </h2>
   </div>
 </template>
 <script>
@@ -33,14 +37,15 @@ export default {
 }
 .heading, .subheading {
   color: white;
-  text-shadow: 0 0 10px rgb(200, 200, 200);
+  text-shadow: 0 0 5px rgb(100, 100, 100);
   text-align: center;
 }
 .subheading {
+  font-size: 30px;
   visibility: visible;
   opacity: 1;
   transition: opacity 200ms, visibility 200ms;
-  font-weight: 500;
+  font-weight: 200;
 }
 .exploringSubheading {
   visibility: hidden;
