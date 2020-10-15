@@ -42,9 +42,8 @@ export default {
     scrollbar-color: #888 #3e3e3e;
   }
   body {
-
-    background-image: radial-gradient(rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.1),
+    background-image: radial-gradient(rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.2),
     rgba(0, 0, 0, 0));
   }
   .imgs, .about {
