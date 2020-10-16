@@ -80,7 +80,7 @@ export default {
     scrollListener:
     function scrollFunction() {
       if (this.state === '1') {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop) {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
           document.querySelector('#topBtn').style.display = 'block';
         } else {
           document.querySelector('#topBtn').style.display = 'none';
