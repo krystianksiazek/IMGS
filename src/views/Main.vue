@@ -74,8 +74,11 @@ export default {
     },
     scrollToTop:
     function top() {
-      document.body.scrollTop = 0;
-      document.documentElement.scrollTop = 0;
+      const topPoint = document.documentElement.scrollTop || document.body.scrollTop;
+      if (topPoint > 0) {
+        window.requestAnimationFrame(top);
+        window.scrollTo(0, topPoint - topPoint / 10);
+      }
     },
     scrollListener:
     function scrollFunction() {
