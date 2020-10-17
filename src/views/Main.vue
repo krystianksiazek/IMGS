@@ -3,21 +3,7 @@
     <Modal v-if="modalOpen" :item="modalData" :modalState="modalOpen"
     @close-modal="modalOpen = false; showScroll()" />
     <Header :sendState="state" />
-    <div class="query">
-      <label v-bind:class="{'exploringLabel': (state === '1')}" for="search">
-        Type space related thing to start</label>
-      <input
-        v-bind:class="{'inputNegativeResults': (results.length === 0) && (state === '1'),
-        'inputPositiveResults': (results.length > 0) && (state === '1'),
-        'exploringInput': (state === '1')}"
-        id="search"
-        name="search"
-        placeholder="Eg. Saturn"
-        autocomplete="off"
-        v-model="query"
-        @input="search"
-      />
-    </div>
+    <Search :sendState="state" :sendResults="results" v-model='query' @input='search'/>
     <p v-bind:class="{'exploringQueryStats': (state === '1')}" class="queryStats">Amount of results:
       <span v-if="results.length >= 100">></span>{{results.length}}
     </p>
@@ -36,6 +22,7 @@
 <script>
 import Header from '@/components/Header.vue';
 import Modal from '@/components/Modal.vue';
+import Search from '@/components/Search.vue';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 
@@ -45,6 +32,7 @@ export default {
   components: {
     Header,
     Modal,
+    Search,
   },
   data() {
     return {
