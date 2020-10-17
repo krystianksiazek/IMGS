@@ -8,7 +8,7 @@
         <a class="close" @click="$emit('close-modal')" />
       </div>
       <div class="content">
-        <div class="photo" @click="myhref(fullSize)"
+        <div class="photo" @click="size(fullSize)"
          v-bind:style="{ backgroundImage: 'url(' + photo + ')' }">
         </div>
         <div class="aboutPhoto">
@@ -59,10 +59,14 @@ export default {
     this.fullSize = this.item.href;
   },
   methods: {
-    myhref(href) {
-      // window.open(links, '_blank');
-      console.log(href);
-      // window.location.href = href;
+    size(href) {
+      // TODO try to make this in <a href="out">
+      fetch(href)
+        .then((res) => res.json())
+        .then((out) => {
+          window.open(out[0]);
+        })
+        .catch((err) => { throw err; });
     },
   },
 };
