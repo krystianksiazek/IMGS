@@ -9,7 +9,7 @@
         'exploringInput': (sendState === '1')}"
         id="search"
         name="search"
-        placeholder="Eg. Saturn"
+        placeholder="e.g Saturn or Astronaut"
         autocomplete="off"
         @input="wakeUp"
       />
