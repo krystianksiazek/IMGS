@@ -243,6 +243,9 @@ export default {
     line-height: 15px;
     display: block;
     text-shadow: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   #topBtn {
     cursor: pointer;
