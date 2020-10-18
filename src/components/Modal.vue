@@ -3,14 +3,16 @@
     <div class="modalWrapper">
       <div class="titleAndClose">
         <span class="title">
-          {{ title }} (ID: {{ id }})
+          (ID: {{ id }}) {{ title }}
         </span>
         <a class="close" @click="$emit('close-modal')" />
       </div>
       <div class="content">
-        <div class="photo" @click="size(fullSize)"
-         v-bind:style="{ backgroundImage: 'url(' + photo + ')' }">
-        </div>
+        <a class="photoLink" :href="link" target="_blank">
+          <div class="photo"
+          v-bind:style="{ backgroundImage: 'url(' + photo + ')' }">
+          </div>
+        </a>
         <div class="aboutPhoto">
           <h1>{{ title }}</h1>
           <p class="description">
@@ -47,6 +49,7 @@ export default {
       title: null,
       description: null,
       fullSize: null,
+      link: '',
     };
   },
   mounted() {
@@ -57,14 +60,14 @@ export default {
     this.title = this.item.data[0].title;
     this.description = this.item.data[0].description;
     this.fullSize = this.item.href;
+    this.size(this.fullSize);
   },
   methods: {
     size(href) {
-      // TODO try to make this in <a href="out">
       fetch(href)
         .then((res) => res.json())
         .then((out) => {
-          window.open(out[0]);
+          [this.link] = out;
         })
         .catch((err) => { throw err; });
     },
@@ -105,6 +108,12 @@ export default {
     align-items: center;
     justify-content: center;
   }
+  .title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0 30px 0 5px;
+  }
   .content {
     display: flex;
     height: 70vh;
@@ -123,6 +132,11 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    h1 {
+      overflow: auto;
+      margin: 0 20px 0 20px;
+      border-bottom: 1px solid white;
+    }
     @media (max-width: 1000px)
     {
       width: 100%;
@@ -131,7 +145,7 @@ export default {
   }
   .photo {
     cursor: pointer;
-    width: 50%;
+    width: 100%;
     height: 100%;
     background-image: "";
     background-repeat: no-repeat;
@@ -140,12 +154,19 @@ export default {
     @media (max-width: 1000px)
     {
       width: 100%;
+    }
+  }
+  .photoLink {
+    width: 100%;
+    @media (max-width: 1000px)
+    {
+      width: 100%;
       height: 50%;
     }
   }
   .description {
     overflow: auto;
-    margin: 0 20px 0 20px;
+    margin: 20px 20px 0 20px;
   }
   .close {
     cursor: pointer;
