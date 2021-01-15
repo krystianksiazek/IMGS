@@ -130,6 +130,7 @@ export default {
     width: 250px;
   }
   .mainWrapper {
+    z-index: 1;
     text-shadow: 0 0 5px rgb(100, 100, 100);
     display: flex;
     flex-direction: column;
