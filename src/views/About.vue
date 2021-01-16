@@ -23,6 +23,7 @@ export default {
 
 <style lang="scss" scoped>
   .wrapper {
+    background: radial-gradient(rgba(0, 0, 0, 0.9), rgba(0,0,0,0.1));
     z-index: 1;
     text-shadow: 0 0 5px rgb(100, 100, 100);
     animation: fadeInAnimation ease 2s;
